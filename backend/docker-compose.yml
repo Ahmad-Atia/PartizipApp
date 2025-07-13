@@ -1,0 +1,183 @@
+services:
+  # Database
+  mysql-db:
+    image: mysql:8.0
+    container_name: partizip-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: partizip_db
+      MYSQL_USER: partizip_user
+      MYSQL_PASSWORD: partizip_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - backend_partizip-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway-service/Dockerfile
+    container_name: api-gateway
+    ports:
+      - "3000:3000"  # Host:3000 → Container:3000
+    environment:
+      - SERVER_PORT=3000
+      - USER_SERVICE_URL=http://user-service:3001
+      - COMMUNITY_SERVICE_URL=http://community-service:3002
+      - EVENT_SERVICE_URL=http://event-service:3003
+      - MQTT_ENABLED=true
+      - MQTT_BROKER_URL=tcp://mosquitto:1883
+      - MQTT_CLIENT_ID=api-gateway
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      user-service:
+        condition: service_healthy
+      community-service:
+        condition: service_healthy
+      event-service:
+        condition: service_healthy
+      mosquitto:
+        condition: service_healthy
+    networks:
+      - backend_partizip-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # User Service
+  user-service:
+    build:
+      context: .
+      dockerfile: user-service/Dockerfile
+    container_name: user-service
+    ports:
+      - "3001:3001"  # Host:3001 → Container:3001
+    environment:
+      - SERVER_PORT=3001
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/partizip_db
+      - SPRING_DATASOURCE_USERNAME=partizip_user
+      - SPRING_DATASOURCE_PASSWORD=partizip_pass
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - backend_partizip-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Community Service
+  community-service:
+    build:
+      context: .
+      dockerfile: community-service/Dockerfile
+    container_name: community-service
+    ports:
+      - "3002:3002"  # Host:3002 → Container:3002
+    environment:
+      - SERVER_PORT=3002
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/partizip_db
+      - SPRING_DATASOURCE_USERNAME=partizip_user
+      - SPRING_DATASOURCE_PASSWORD=partizip_pass
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - backend_partizip-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Event Service
+  event-service:
+    build:
+      context: .
+      dockerfile: event-service/Dockerfile
+    container_name: event-service
+    ports:
+      - "3003:3003"  # Host:3003 → Container:3003
+    environment:
+      - SERVER_PORT=3003
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/partizip_db
+      - SPRING_DATASOURCE_USERNAME=partizip_user
+      - SPRING_DATASOURCE_PASSWORD=partizip_pass
+      - MQTT_ENABLED=true
+      - MQTT_BROKER_URL=tcp://mosquitto:1883
+      - MQTT_CLIENT_ID=partizip-event-service
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      mosquitto:
+        condition: service_healthy
+    networks:
+      - backend_partizip-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MQTT Broker (Mosquitto)
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: partizip-mosquitto
+    ports:
+      - "1883:1883"    # MQTT port
+      - "8083:8083"    # WebSocket port
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    networks:
+      - backend_partizip-network
+    healthcheck:
+      test: ["CMD", "mosquitto_pub", "-h", "localhost", "-t", "test", "-m", "test"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+      
+
+  # Frontend Service
+  # frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: frontend/Dockerfile
+  #   container_name: partizip-frontend
+  #   ports:
+  #     - "5000:5000"  # Host:5000 → Container:5000
+  #   depends_on:
+  #     - api-gateway
+  #   networks:
+  #     - backend_partizip-network
+  #   environment:
+  #      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+  #       - REACT_NATIVE_PACKAGER_HOSTNAME=0.0.0.0
+  #       - EXPO_TOKEN=${EXPO_TOKEN}  # Add your Expo token here
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:5000"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+
+networks:
+  backend_partizip-network:
+    driver: bridge
+
+volumes:
+  mysql_data:

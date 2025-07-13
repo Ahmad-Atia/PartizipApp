@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "PartiZip Kids",
+    "slug": "partizip-kids",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#007AFF"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.partizip.kids"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#007AFF"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.partizip.kids"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "API_BASE_URL": "http://192.168.178.63:3000/api",
+      "WEBSOCKET_URL": "ws://192.168.178.63:3000/ws/events",
+      "BROKER_URL": "ws://192.168.178.38:9001"
+      
+    }
+  }
+}
