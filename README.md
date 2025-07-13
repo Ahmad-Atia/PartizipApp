@@ -1,33 +1,57 @@
-# Partizip App
+# 🏛️ Partizip App
 
 Eine moderne Community-Plattform für Events und Bürgerbeteiligung, entwickelt mit Microservices-Architektur.
 
+## 📖 Über das Projekt
+
+Partizip ist eine umfassende Plattform, die es Bürgern ermöglicht, sich aktiv an lokalen Events und Community-Aktivitäten zu beteiligen. Die Anwendung bietet eine benutzerfreundliche Oberfläche für Event-Management, Community-Bildung und Echtzeitkommunikation.
+
 ## 🏗️ Architektur
 
-Das Projekt basiert auf einer Microservices-Architektur mit folgenden Komponenten:
+Das Projekt basiert auf einer modernen Microservices-Architektur mit folgenden Komponenten:
 
-- **API Gateway** (Port 3000) - Zentrale Schnittstelle für alle Services
-- **User Service** (Port 3001) - Benutzerverwaltung und Authentifizierung
-- **Community Service** (Port 3002) - Community-Management und Posts
-- **Event Service** (Port 3003) - Event-Management und Benachrichtigungen
-- **MySQL Database** (Port 3307) - Zentrale Datenhaltung
-- **MQTT Broker** (Port 1883) - Echtzeitkommunikation zwischen Services
+| Service | Port | Beschreibung |
+|---------|------|--------------|
+| **API Gateway** | 3000 | Zentrale Schnittstelle und Routing für alle Services |
+| **User Service** | 3001 | Benutzerverwaltung, Authentifizierung und Profilverwaltung |
+| **Community Service** | 3002 | Community-Management, Posts und Interaktionen |
+| **Event Service** | 3003 | Event-Erstellung, -Verwaltung und Benachrichtigungen |
+| **MySQL Database** | 3307 | Zentrale, persistente Datenhaltung |
+| **MQTT Broker** | 1883 | Echtzeitkommunikation zwischen Services |
 
 ## 🚀 Technologien
 
-- **Backend**: Spring Boot (Java)
-- **Frontend**: React Native (Expo)
-- **Database**: MySQL 8.0
+### Backend
+- **Framework**: Spring Boot 3.x (Java 17+)
+- **API Gateway**: Spring Cloud Gateway
+- **Database**: MySQL 8.0 mit JPA/Hibernate
 - **Message Broker**: Eclipse Mosquitto (MQTT)
 - **Containerization**: Docker & Docker Compose
-- **API Gateway**: Spring Cloud Gateway
+- **Monitoring**: Spring Boot Actuator
+
+### Frontend
+- **Framework**: React Native mit Expo
+- **State Management**: Redux/Context API
+- **UI Components**: React Native Elements
+- **Navigation**: React Navigation
+
+### DevOps
+- **Containerization**: Docker
+- **Orchestration**: Docker Compose
+- **Health Checks**: Integrierte Health-Monitoring
+- **Logging**: Centralized Logging
 
 ## 📋 Voraussetzungen
 
-- Docker Desktop
-- Docker Compose
-- Node.js (für Frontend-Entwicklung)
-- Java 11+ (für Backend-Entwicklung)
+### Systemanforderungen
+- **Docker Desktop** (v20.10+)
+- **Docker Compose** (v2.0+)
+- **Freie Ports**: 3000-3003, 3307, 1883, 8083
+
+### Für Entwicklung
+- **Node.js** (v16+) für Frontend-Entwicklung
+- **Java** (v17+) für Backend-Entwicklung
+- **Git** für Versionskontrolle
 
 ## 🛠️ Installation und Setup
 
@@ -37,111 +61,193 @@ git clone <repository-url>
 cd PartizipApp
 ```
 
-### 2. Backend Services starten
+### 2. Umgebung vorbereiten
+```bash
+# Mosquitto-Konfiguration erstellen
+mkdir -p backend/mosquitto/{config,data,log}
+
+# Datenbankskripte bereitstellen
+mkdir -p backend/init-scripts
+```
+
+### 3. Backend Services starten
 ```bash
 cd backend
 docker-compose up -d
 ```
 
-### 3. Services überprüfen
+### 4. Installation überprüfen
 ```bash
+# Service-Status prüfen
 docker-compose ps
-```
 
-### 4. Logs anzeigen
-```bash
+# Logs anzeigen
 docker-compose logs -f
+
+# Health-Checks ausführen
+curl http://localhost:3000/actuator/health
 ```
 
 ## 🔧 Problembehebung
 
-### Container-Konflikt beheben
-Wenn Sie einen Container-Namenskonflikt erhalten:
+### ❌ Container-Konflikt beheben
 ```bash
+# Alle Container stoppen und entfernen
 docker-compose down
-docker container prune
+docker container prune -f
+docker volume prune -f
+
+# Services neu starten
 docker-compose up -d
 ```
 
-### Services neustarten
+### 🔄 Services neustarten
 ```bash
+# Einzelnen Service neustarten
 docker-compose restart <service-name>
+
+# Alle Services neustarten
+docker-compose restart
 ```
 
-## 📡 API Endpunkte
+### 📊 Debugging
+```bash
+# Service-Logs anzeigen
+docker-compose logs -f <service-name>
+
+# Container-Status prüfen
+docker-compose ps -a
+
+# Netzwerk-Diagnose
+docker network ls
+docker network inspect backend_partizip-network
+```
+
+## 📡 API Dokumentation
 
 ### API Gateway (Port 3000)
-- Health Check: `GET /actuator/health`
+- **Health Check**: `GET /actuator/health`
+- **Metrics**: `GET /actuator/metrics`
+- **Info**: `GET /actuator/info`
 
 ### User Service (Port 3001)
-- Health Check: `GET /actuator/health`
-- User Management: `/users/**`
+- **Health Check**: `GET /actuator/health`
+- **User Registration**: `POST /users/register`
+- **User Login**: `POST /users/login`
+- **Profile Management**: `GET|PUT /users/{id}`
 
 ### Community Service (Port 3002)
-- Health Check: `GET /actuator/health`
-- Community Management: `/communities/**`
+- **Health Check**: `GET /actuator/health`
+- **Communities**: `GET|POST /communities`
+- **Posts**: `GET|POST /communities/{id}/posts`
+- **Member Management**: `POST /communities/{id}/members`
 
 ### Event Service (Port 3003)
-- Health Check: `GET /actuator/health`
-- Event Management: `/events/**`
+- **Health Check**: `GET /actuator/health`
+- **Events**: `GET|POST /events`
+- **Event Details**: `GET|PUT|DELETE /events/{id}`
+- **Event Participation**: `POST /events/{id}/participants`
 
-## 🗄️ Datenbank
+## 🗄️ Datenbank-Konfiguration
 
-- **Host**: localhost
-- **Port**: 3307
-- **Database**: partizip_db
-- **Username**: partizip_user
-- **Password**: partizip_pass
+### Verbindungsdetails
+```properties
+Host: localhost
+Port: 3307
+Database: partizip_db
+Username: partizip_user
+Password: partizip_pass
+```
 
-## 📨 MQTT Broker
+### Tabellen-Schema
+- **users**: Benutzerdaten und Authentifizierung
+- **communities**: Community-Informationen
+- **events**: Event-Details und Metadaten
+- **posts**: Community-Posts und Inhalte
+- **participants**: Event-Teilnahmen
 
-- **Host**: localhost
-- **Port**: 1883 (MQTT)
-- **WebSocket Port**: 8083
+## 📨 MQTT-Konfiguration
+
+### Verbindungsdetails
+```properties
+Host: localhost
+MQTT Port: 1883
+WebSocket Port: 8083
+```
+
+### Topics
+- `events/created` - Neue Events
+- `events/updated` - Event-Updates
+- `communities/posts` - Neue Posts
+- `users/notifications` - Benutzerbenachrichtigungen
 
 ## 🎯 Entwurfsmuster
 
-Das Projekt implementiert verschiedene Entwurfsmuster:
-
-### 1. Beobachter-Muster (Observer)
+### 1. 👁️ Beobachter-Muster (Observer)
 - **Einsatz**: MQTT-basierte Kommunikation zwischen Services
-- **Zweck**: Lose Kopplung und Echtzeit-Benachrichtigungen
+- **Implementierung**: Event-Service publiziert Events, andere Services abonnieren
+- **Vorteile**: Lose Kopplung, Echtzeit-Benachrichtigungen
 
-### 2. Fassaden-Muster (Facade)
+### 2. 🏛️ Fassaden-Muster (Facade)
 - **Einsatz**: API Gateway als zentrale Schnittstelle
-- **Zweck**: Vereinfachte Client-Kommunikation
+- **Implementierung**: Gateway routet Anfragen an entsprechende Services
+- **Vorteile**: Vereinfachte Client-Kommunikation, zentrale Authentifizierung
 
-### 3. Fabrikmethode (Factory Method)
+### 3. 🏭 Fabrikmethode (Factory Method)
 - **Einsatz**: UserService mit UserDto, UserDtoCreater, User
-- **Zweck**: Flexible Objekterstellung
+- **Implementierung**: Flexible Objekterstellung basierend auf Eingabedaten
+- **Vorteile**: Erweiterbarkeit, Kapselung der Erstellungslogik
 
 ## 🔄 Entwicklung
 
-### Backend Services bauen
+### Backend-Services bauen
 ```bash
 cd backend
+
+# Alle Services bauen
 docker-compose build
-```
 
-### Einzelnen Service neu bauen
-```bash
+# Einzelnen Service bauen
 docker-compose build <service-name>
+
+# Services mit neuem Build starten
+docker-compose up -d --build
 ```
 
-### Logs eines Services anzeigen
+### Development-Modus
 ```bash
-docker-compose logs -f <service-name>
+# Services im Development-Modus starten
+docker-compose -f docker-compose.dev.yml up -d
+
+# Live-Reload für Services aktivieren
+docker-compose exec <service-name> ./gradlew bootRun
 ```
 
 ## 🧪 Testing
 
 ### Health Checks
-Alle Services verfügen über Health-Check-Endpunkte:
 ```bash
-curl http://localhost:3000/actuator/health  # API Gateway
-curl http://localhost:3001/actuator/health  # User Service
-curl http://localhost:3002/actuator/health  # Community Service
-curl http://localhost:3003/actuator/health  # Event Service
+# API Gateway
+curl http://localhost:3000/actuator/health
+
+# User Service
+curl http://localhost:3001/actuator/health
+
+# Community Service
+curl http://localhost:3002/actuator/health
+
+# Event Service
+curl http://localhost:3003/actuator/health
+```
+
+### Integration Tests
+```bash
+# MQTT-Verbindung testen
+mosquitto_pub -h localhost -t test/topic -m "Hello World"
+mosquitto_sub -h localhost -t test/topic
+
+# Datenbank-Verbindung testen
+docker-compose exec mysql-db mysql -u partizip_user -p partizip_db
 ```
 
 ## 📁 Projektstruktur
@@ -149,24 +255,73 @@ curl http://localhost:3003/actuator/health  # Event Service
 ```
 PartizipApp/
 ├── backend/
-│   ├── api-gateway-service/
-│   ├── user-service/
-│   ├── community-service/
-│   ├── event-service/
-│   ├── mosquitto/
-│   └── docker-compose.yml
-├── frontend/
+│   ├── api-gateway-service/          # API Gateway Service
+│   │   ├── src/main/java/
+│   │   └── Dockerfile
+│   ├── user-service/                 # User Management Service
+│   │   ├── src/main/java/
+│   │   └── Dockerfile
+│   ├── community-service/            # Community Management Service
+│   │   ├── src/main/java/
+│   │   └── Dockerfile
+│   ├── event-service/                # Event Management Service
+│   │   ├── src/main/java/
+│   │   └── Dockerfile
+│   ├── mosquitto/                    # MQTT Broker Configuration
+│   │   ├── mosquitto.conf
+│   │   ├── data/
+│   │   └── log/
+│   ├── init-scripts/                 # Database Initialization Scripts
+│   └── docker-compose.yml           # Service Orchestration
+├── frontend/                         # React Native App
+│   ├── src/
+│   ├── package.json
+│   └── Dockerfile
+├── docs/                            # Documentation
 └── README.md
+```
+
+## 🚀 Deployment
+
+### Produktionsumgebung
+```bash
+# Produktions-Build erstellen
+docker-compose -f docker-compose.prod.yml build
+
+# Services in Produktion starten
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+### Monitoring
+```bash
+# Service-Metriken abrufen
+curl http://localhost:3000/actuator/metrics
+
+# Prometheus-Metriken (falls konfiguriert)
+curl http://localhost:3000/actuator/prometheus
 ```
 
 ## 🤝 Mitwirkende
 
-- Entwicklerteam SWT2
+- **Entwicklerteam SWT2**
+- **Projektleiter**: [Name]
+- **Backend-Entwickler**: [Name]
+- **Frontend-Entwickler**: [Name]
+- **DevOps-Engineer**: [Name]
 
 ## 📄 Lizenz
 
-Dieses Projekt ist für Bildungszwecke entwickelt.
+Dieses Projekt ist für Bildungszwecke an der [Universität/Hochschule] entwickelt.
+
+## 🆘 Support
+
+Bei Problemen oder Fragen:
+1. Überprüfen Sie die [Issues](link-to-issues)
+2. Konsultieren Sie die [Wiki](link-to-wiki)
+3. Kontaktieren Sie das Entwicklerteam
 
 ---
 
-**Hinweis**: Stellen Sie sicher, dass alle Container ordnungsgemäß gestartet sind, bevor Sie die Anwendung verwenden.
+**💡 Hinweis**: Stellen Sie sicher, dass alle Container ordnungsgemäß gestartet sind und die Health-Checks erfolgreich sind, bevor Sie die Anwendung verwenden.
+
+**🔧 Wartung**: Führen Sie regelmäßig `docker-compose down && docker system prune` aus, um nicht verwendete Container und Images zu entfernen.
