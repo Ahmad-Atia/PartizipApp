@@ -61,15 +61,6 @@ git clone <repository-url>
 cd PartizipApp
 ```
 
-### 2. Umgebung vorbereiten
-```bash
-# Mosquitto-Konfiguration erstellen
-mkdir -p backend/mosquitto/{config,data,log}
-
-# Datenbankskripte bereitstellen
-mkdir -p backend/init-scripts
-```
-
 ### 3. Backend Services starten
 ```bash
 cd backend
@@ -122,31 +113,6 @@ docker-compose ps -a
 docker network ls
 docker network inspect backend_partizip-network
 ```
-
-## 📡 API Dokumentation
-
-### API Gateway (Port 3000)
-- **Health Check**: `GET /actuator/health`
-- **Metrics**: `GET /actuator/metrics`
-- **Info**: `GET /actuator/info`
-
-### User Service (Port 3001)
-- **Health Check**: `GET /actuator/health`
-- **User Registration**: `POST /users/register`
-- **User Login**: `POST /users/login`
-- **Profile Management**: `GET|PUT /users/{id}`
-
-### Community Service (Port 3002)
-- **Health Check**: `GET /actuator/health`
-- **Communities**: `GET|POST /communities`
-- **Posts**: `GET|POST /communities/{id}/posts`
-- **Member Management**: `POST /communities/{id}/members`
-
-### Event Service (Port 3003)
-- **Health Check**: `GET /actuator/health`
-- **Events**: `GET|POST /events`
-- **Event Details**: `GET|PUT|DELETE /events/{id}`
-- **Event Participation**: `POST /events/{id}/participants`
 
 ## 🗄️ Datenbank-Konfiguration
 
