@@ -1,0 +1,104 @@
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><element><id>UMLClass</id><coordinates><x>396</x><y>60</y><w>180</w><h>84</h></coordinates><panel_attributes>_CommunityController_
+--
+
+--
++createPost(request: CreatePostDTO): UUD
++createPoll(request: CreatePollDTO): UUID
++addComment(targetID: UUID, request: CreateCommentDTO): UUID
++likePost(postID: UUID, userID: UUID): void
++sharePost(postID: UUID, userID: UUID): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>144</x><y>228</y><w>126</w><h>120</h></coordinates><panel_attributes>_Post_
+--
+-postID: UUID
+-authorID: UUID
+-content: String
+- mediaUrl: String
+- likeUserIds: Set&lt;UUID&gt;
+- createdAt: DateTime
+- taggedEventId: UUID 
+--
++ addLike(userId: UUID): void
++ share(userId: UUID): void
++ tagEvent(eventId: UUID): void
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>624</x><y>228</y><w>126</w><h>114</h></coordinates><panel_attributes>_Poll_
+--
+-pollID: UUID
+-question: String
+-options: Map&lt;String, Integer&gt;
+-votes: Map&lt;UUID, String&gt;
+-createdAt: DateTime
+--
++vote(userID: UUID, option: String): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>228</y><w>126</w><h>114</h></coordinates><panel_attributes>_Comment_
+--
+-commentID: UUID
+-content: String
+-authorID: UUID
+-targetID: UUID
+-createdAt: DateTime
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>198</x><y>138</y><w>222</w><h>102</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;150;350;10</additional_attributes></element><element><id>Relation</id><coordinates><x>426</x><y>138</y><w>54</w><h>102</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;150;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>558</x><y>138</y><w>102</w><h>102</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>150;150;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>264</x><y>264</y><w>126</w><h>30</h></coordinates><panel_attributes>lt=-
+m1=0..n
+m2=0..1
+besitzt </panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>Relation</id><coordinates><x>498</x><y>270</y><w>138</w><h>30</h></coordinates><panel_attributes>lt=-
+m1=0..n
+m2=0..1
+besitzt</panel_attributes><additional_attributes>10;20;210;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>480</y><w>162</w><h>66</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_JpaRepository_
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>384</y><w>162</w><h>66</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_PostRepository_
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>72</x><y>444</y><w>18</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>84</x><y>342</y><w>132</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>11;70;200;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>462</x><y>504</y><w>162</w><h>66</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_JpaRepository_
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>462</x><y>396</y><w>162</w><h>66</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_CommentRepository_
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>534</x><y>456</y><w>18</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>336</y><w>84</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;100;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>780</x><y>474</y><w>162</w><h>66</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_JpaRepository_
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>780</x><y>372</y><w>162</w><h>66</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_PollRepository_
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>852</x><y>432</y><w>18</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>732</x><y>336</y><w>150</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>230;60;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>186</x><y>402</y><w>108</w><h>102</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_PostDto_
+--
+-postID: UUID
+-authorID: UUID
+-content: String
+- mediaUrl: String
+- likeUserIds: Set&lt;UUID&gt;
+- createdAt: DateTime
+- taggedEventId: UUID 
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>234</x><y>342</y><w>54</w><h>72</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;10;30;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>342</x><y>402</y><w>96</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_CommenttDto_
+--
+-commentID: UUID
+-content: String
+-authorID: UUID
+-targetID: UUID
+-createdAt: DateTime
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>384</x><y>336</y><w>54</w><h>78</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>20;10;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>666</x><y>408</y><w>96</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_CommenttDto_
+--
+-commentID: UUID
+-content: String
+-authorID: UUID
+-targetID: UUID
+-createdAt: DateTime
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>672</x><y>336</y><w>54</w><h>84</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;10;30;120</additional_attributes></element></diagram>

@@ -1,0 +1,92 @@
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>616</x><y>40</y><w>224</w><h>112</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+ApiGatewayFacade
+--
+- authService: AuthService
+- dispatcher: RequestDispatcher
+- mqttHandler: MqttMessageHandler
+--
++ handleRequest(request: ApiRequest): ApiResponse</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>256</x><y>232</y><w>224</w><h>112</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+AuthService
+--
+- tokenProvider: TokenProvider
+--
++ authenticate(credentials: Credentials): AuthToken
++ authorizeToken(token: AuthToken, resource: String): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>232</y><w>280</w><h>112</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+RequestDispatcher
+--
+--
++ forwardToUserService(request: ApiRequest): ApiResponse
++ forwardToEventService(request: ApiRequest): ApiResponse
++ forwardToCommunityService(request: ApiRequest): ApiResponse</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>960</x><y>232</y><w>224</w><h>112</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+MqttMessageHandler
+--
+--
++ publish(topic: String, payload: String): void
++ subscribe(topic: String): void
++ onMessage(topic: String, callback): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>16</x><y>384</y><w>168</w><h>80</h></coordinates><panel_attributes>_JwtTokenProvider_
+--
+--
++ generateToken(userID: UUID): AuthToken
++ validateToken(token: String): boolean
++ extractUserID(token: String): UUID</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1104</x><y>448</y><w>152</w><h>88</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+ApiRequest
+--
+- endpoint: String
+- method: String
+- headers: Map&lt;String, String&gt;
+- body: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>968</x><y>456</y><w>112</w><h>72</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+ApiResponse
+--
+- statusCode: int
+- body: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>232</y><w>224</w><h>112</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+TokenProvider
+--
+
+--
++ generateToken(userID: UUID): AuthToken
++ validateToken(token: String): boolean
++ extractUserID(token: String): UUID</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>248</x><y>56</y><w>224</w><h>112</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+SecurityHandler
+--
+
+--
++ authenticate(request: ApiRequest): AuthToken
++ authorize(request: ApiRequest): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>656</x><y>464</y><w>112</w><h>56</h></coordinates><panel_attributes>UserService
+--
+bg=orange
+fg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>784</x><y>464</y><w>112</w><h>56</h></coordinates><panel_attributes>CommunityService
+--
+bg=orange
+fg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>536</x><y>464</y><w>112</w><h>56</h></coordinates><panel_attributes>EventService
+--
+bg=orange
+fg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>96</x><y>336</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>472</x><y>144</y><w>200</w><h>104</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;110;230;10</additional_attributes></element><element><id>Relation</id><coordinates><x>672</x><y>144</y><w>48</w><h>104</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>144</y><w>176</w><h>104</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>200;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>328</x><y>160</y><w>32</w><h>88</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>20;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>216</x><y>288</y><w>56</w><h>32</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;50;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>448</y><w>112</w><h>64</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+Credentials
+--
+- username: String
+- password: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>224</x><y>448</y><w>112</w><h>64</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+AuthToken
+--
+- value: String
+- expiresAt: DateTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>336</y><w>72</w><h>128</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>70;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>288</x><y>336</y><w>80</w><h>128</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;140;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>336</y><w>240</w><h>136</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;returns&gt;&gt;</panel_attributes><additional_attributes>280;150;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>872</x><y>320</y><w>280</w><h>144</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>330;160;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>536</x><y>8</y><w>992</w><h>584</h></coordinates><panel_attributes>Fassaden-Muster
+--
+bg=red
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>528</x><y>336</y><w>200</w><h>144</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;160;230;10</additional_attributes></element><element><id>Relation</id><coordinates><x>664</x><y>336</y><w>80</w><h>144</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;160;80;10</additional_attributes></element><element><id>Relation</id><coordinates><x>736</x><y>336</y><w>80</w><h>144</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>80;160;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1200</x><y>232</y><w>224</w><h>112</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+MqttToWebSocket
+--
+--
++ publish(topic: String, payload: String): void
++ subscribe(topic: String): void
++ onMessage(topic: String, callback): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1192</x><y>72</y><w>224</w><h>112</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+MessageHanlder
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1280</x><y>176</y><w>24</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element></diagram>

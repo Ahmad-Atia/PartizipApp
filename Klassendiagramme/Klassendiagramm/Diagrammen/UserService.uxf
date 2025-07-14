@@ -1,0 +1,71 @@
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><help_text>S pace for diagramnotes</help_text><element><id>UMLClass</id><coordinates><x>368</x><y>0</y><w>320</w><h>128</h></coordinates><panel_attributes>_UserController_
+--
+-userService: UserService
+-authService: AuthService
+--
++registerUser(vorname: String, nachname: String, geb: Date,
+ interessen: List&lt;String&gt;, email: String, passwort: String): boolean
++loginUser(email: String, passwort: String): boolean
++getUserProfile(userID: UUID): User
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>96</x><y>432</y><w>208</w><h>184</h></coordinates><panel_attributes>_User_
+--
+-userID: UUID
+-name: String
+-lastname: String
+-avatar: String
+-passwordHashed: String
+-email: String
+-address: String
+participation: List&lt;String&gt;
+--
++getProfile(): User
++setParti(parti: String): void
++getAllParti(): List&lt;String&gt;
+
+
+
+group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>416</x><y>192</y><w>320</w><h>72</h></coordinates><panel_attributes>_UserService_
+--
+--
++createUser(userData: Object): User
++updateUser(userData: Object): boolean
++getUser(): User
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>552</x><y>120</y><w>56</w><h>88</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>88</x><y>176</y><w>216</w><h>88</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_UserRepository_
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>88</x><y>40</y><w>216</w><h>88</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_JpaRepository_
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>256</y><w>24</w><h>192</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;220</additional_attributes></element><element><id>Relation</id><coordinates><x>192</x><y>120</y><w>24</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>368</x><y>320</y><w>200</w><h>88</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_UserDtoCreator_
+--
+factory(user :User): UserDto 
+--
+group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>448</x><y>400</y><w>24</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-
+group=group-0</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>408</x><y>456</y><w>200</w><h>184</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+_UserDto_
+--
+-userID: UUID
+-name: String
+-lastname: String
+-avatar: String
+-passwordHashed: String
+-email: String
+-address: String
+-participation: List&lt;String&gt;
+-createdAt: Date
+-updatedAt: Date
+--
+group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>296</x><y>480</y><w>128</w><h>32</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;
+group=group-0</panel_attributes><additional_attributes>10;20;140;20</additional_attributes></element><element><id>Relation</id><coordinates><x>296</x><y>216</y><w>136</w><h>32</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;150;20</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>24</x><y>296</y><w>672</w><h>368</h></coordinates><panel_attributes>Fabrikmethode1
+--
+
+bg=red
+fg=red
+group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>256</y><w>56</w><h>80</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element></diagram>
