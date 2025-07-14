@@ -1,86 +1,88 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>1970</x><y>40</y><w>280</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>1773</x><y>36</y><w>252</w><h>126</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
 ApiGatewayFacade
 --
 - authService: AuthService
 - dispatcher: RequestDispatcher
 - mqttHandler: MqttMessageHandler
 --
-+ handleRequest(request: ApiRequest): ApiResponse</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1520</x><y>280</y><w>280</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
++ handleRequest(request: ApiRequest): ApiResponse</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1368</x><y>252</y><w>252</w><h>126</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
 AuthService
 --
 - tokenProvider: TokenProvider
 --
 + authenticate(credentials: Credentials): AuthToken
-+ authorizeToken(token: AuthToken, resource: String): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1950</x><y>280</y><w>350</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
++ authorizeToken(token: AuthToken, resource: String): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1755</x><y>252</y><w>315</w><h>126</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
 RequestDispatcher
 --
 --
 + forwardToUserService(request: ApiRequest): ApiResponse
 + forwardToEventService(request: ApiRequest): ApiResponse
-+ forwardToCommunityService(request: ApiRequest): ApiResponse</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2400</x><y>280</y><w>280</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
++ forwardToCommunityService(request: ApiRequest): ApiResponse</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2160</x><y>252</y><w>252</w><h>126</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
 MqttMessageHandler
 --
 --
 + publish(topic: String, payload: String): void
 + subscribe(topic: String): void
-+ onMessage(topic: String, callback): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1220</x><y>470</y><w>210</w><h>100</h></coordinates><panel_attributes>_JwtTokenProvider_
++ onMessage(topic: String, callback): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1098</x><y>423</y><w>189</w><h>90</h></coordinates><panel_attributes>_JwtTokenProvider_
 --
 --
 + generateToken(userID: UUID): AuthToken
 + validateToken(token: String): boolean
-+ extractUserID(token: String): UUID</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2300</x><y>530</y><w>190</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
++ extractUserID(token: String): UUID</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2070</x><y>477</y><w>171</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
 ApiRequest
 --
 - endpoint: String
 - method: String
 - headers: Map&lt;String, String&gt;
-- body: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2120</x><y>510</y><w>140</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+- body: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1908</x><y>459</y><w>126</w><h>81</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
 ApiResponse
 --
 - statusCode: int
-- body: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1200</x><y>280</y><w>280</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+- body: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1080</x><y>252</y><w>252</w><h>126</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 TokenProvider
 --
 
 --
 + generateToken(userID: UUID): AuthToken
 + validateToken(token: String): boolean
-+ extractUserID(token: String): UUID</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1510</x><y>60</y><w>280</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
++ extractUserID(token: String): UUID</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1359</x><y>54</y><w>252</w><h>126</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 SecurityHandler
 --
 
 --
 + authenticate(request: ApiRequest): AuthToken
-+ authorize(request: ApiRequest): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1320</x><y>410</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1790</x><y>170</y><w>250</w><h>130</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;110;230;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2040</x><y>170</y><w>60</w><h>130</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2200</x><y>170</y><w>220</w><h>130</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>200;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1610</x><y>190</y><w>40</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>20;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1470</x><y>350</y><w>70</w><h>40</h></coordinates><panel_attributes>lt=-
-</panel_attributes><additional_attributes>10;20;50;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1650</x><y>550</y><w>140</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
++ authorize(request: ApiRequest): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1188</x><y>369</y><w>27</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1611</x><y>153</y><w>225</w><h>117</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;110;230;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1836</x><y>153</y><w>54</w><h>117</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1980</x><y>153</y><w>198</w><h>117</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>200;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1449</x><y>171</y><w>36</w><h>99</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>20;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1323</x><y>315</y><w>63</w><h>36</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;50;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1485</x><y>495</y><w>126</w><h>72</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
 Credentials
 --
 - username: String
-- password: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1480</x><y>550</y><w>140</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+- password: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1332</x><y>495</y><w>126</w><h>72</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
 AuthToken
 --
 - value: String
-- expiresAt: DateTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1630</x><y>410</y><w>90</w><h>160</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>70;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1560</x><y>410</y><w>100</w><h>160</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;140;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2130</x><y>410</y><w>90</w><h>120</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;returns&gt;&gt;</panel_attributes><additional_attributes>10;100;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2290</x><y>390</y><w>80</w><h>160</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>50;140;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>1870</x><y>0</y><w>1240</w><h>730</h></coordinates><panel_attributes>Fassaden-Muster
+- expiresAt: DateTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1467</x><y>369</y><w>81</w><h>144</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>70;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1404</x><y>369</y><w>90</w><h>144</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;140;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1917</x><y>369</y><w>81</w><h>108</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;returns&gt;&gt;</panel_attributes><additional_attributes>10;100;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2061</x><y>351</y><w>72</w><h>144</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>50;140;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>1683</x><y>0</y><w>1116</w><h>657</h></coordinates><panel_attributes>Fassaden-Muster
 --
-bg=red
-fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2700</x><y>280</y><w>280</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
+
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2430</x><y>252</y><w>252</w><h>126</h></coordinates><panel_attributes>&lt;&lt;Component&gt;&gt;
 MqttToWebSocket
 --
 --
 + publish(topic: String, payload: String): void
 + subscribe(topic: String): void
-+ onMessage(topic: String, callback): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2690</x><y>80</y><w>280</w><h>140</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
++ onMessage(topic: String, callback): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2421</x><y>72</y><w>252</w><h>126</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 MessageHanlder
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2800</x><y>210</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>4280</x><y>1380</y><w>300</w><h>140</h></coordinates><panel_attributes>_CommunityController_
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2520</x><y>189</y><w>27</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>3852</x><y>1242</y><w>270</w><h>126</h></coordinates><panel_attributes>_CommunityController_
 --
 
 --
@@ -89,7 +91,8 @@ MessageHanlder
 +addComment(targetID: UUID, request: CreateCommentDTO): UUID
 +likePost(postID: UUID, userID: UUID): void
 +sharePost(postID: UUID, userID: UUID): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>3860</x><y>1660</y><w>210</w><h>200</h></coordinates><panel_attributes>_Post_
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>3474</x><y>1494</y><w>189</w><h>180</h></coordinates><panel_attributes>_Post_
 --
 -postID: UUID
 -authorID: UUID
@@ -103,7 +106,7 @@ MessageHanlder
 + share(userId: UUID): void
 + tagEvent(eventId: UUID): void
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4660</x><y>1660</y><w>210</w><h>190</h></coordinates><panel_attributes>_Poll_
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4194</x><y>1494</y><w>189</w><h>171</h></coordinates><panel_attributes>_Poll_
 --
 -pollID: UUID
 -question: String
@@ -112,7 +115,7 @@ MessageHanlder
 -createdAt: DateTime
 --
 +vote(userID: UUID, option: String): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4250</x><y>1660</y><w>210</w><h>190</h></coordinates><panel_attributes>_Comment_
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>3825</x><y>1494</y><w>189</w><h>171</h></coordinates><panel_attributes>_Comment_
 --
 -commentID: UUID
 -content: String
@@ -121,40 +124,51 @@ MessageHanlder
 -createdAt: DateTime
 --
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>3950</x><y>1510</y><w>370</w><h>170</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;150;350;10</additional_attributes></element><element><id>Relation</id><coordinates><x>4330</x><y>1510</y><w>90</w><h>170</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;150;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>4550</x><y>1510</y><w>170</w><h>170</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>150;150;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>4060</x><y>1720</y><w>210</w><h>50</h></coordinates><panel_attributes>lt=-
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>3555</x><y>1359</y><w>333</w><h>153</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;150;350;10</additional_attributes></element><element><id>Relation</id><coordinates><x>3897</x><y>1359</y><w>81</w><h>153</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;150;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>4095</x><y>1359</y><w>153</w><h>153</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>150;150;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>3654</x><y>1548</y><w>189</w><h>45</h></coordinates><panel_attributes>lt=-
 m1=0..n
 m2=0..1
-besitzt </panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>Relation</id><coordinates><x>4450</x><y>1730</y><w>230</w><h>50</h></coordinates><panel_attributes>lt=-
+besitzt </panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>Relation</id><coordinates><x>4005</x><y>1557</y><w>207</w><h>45</h></coordinates><panel_attributes>lt=-
 m1=0..n
 m2=0..1
-besitzt</panel_attributes><additional_attributes>10;20;210;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>3620</x><y>2080</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+besitzt</panel_attributes><additional_attributes>10;20;210;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>3258</x><y>1872</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _JpaRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>3620</x><y>1920</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>3258</x><y>1728</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _PostRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>3740</x><y>2020</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>3760</x><y>1850</y><w>220</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>11;70;200;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>4390</x><y>2120</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>3366</x><y>1818</y><w>27</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>3384</x><y>1665</y><w>198</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>11;70;200;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>3951</x><y>1908</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _JpaRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4390</x><y>1940</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>3951</x><y>1746</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _CommentRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>4510</x><y>2040</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>4420</x><y>1840</y><w>140</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;100;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>4920</x><y>2070</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>4059</x><y>1836</y><w>27</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>3978</x><y>1656</y><w>126</w><h>108</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;100;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>4428</x><y>1863</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _JpaRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4920</x><y>1900</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4428</x><y>1710</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _PollRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>5040</x><y>2000</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>4840</x><y>1840</y><w>250</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>230;60;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>3930</x><y>1950</y><w>180</w><h>170</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>4536</x><y>1800</y><w>27</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>4356</x><y>1656</y><w>225</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>230;60;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>3537</x><y>1755</y><w>162</w><h>153</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _PostDto_
 --
 -postID: UUID
@@ -164,8 +178,10 @@ _PostDto_
 - likeUserIds: Set&lt;UUID&gt;
 - createdAt: DateTime
 - taggedEventId: UUID 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>4010</x><y>1850</y><w>90</w><h>120</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;10;30;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>4190</x><y>1950</y><w>160</w><h>150</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>3609</x><y>1665</y><w>81</w><h>108</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;10;30;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>3771</x><y>1755</y><w>144</w><h>135</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _CommenttDto_
 --
 -commentID: UUID
@@ -173,8 +189,10 @@ _CommenttDto_
 -authorID: UUID
 -targetID: UUID
 -createdAt: DateTime
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>4260</x><y>1840</y><w>90</w><h>130</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>20;10;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>4730</x><y>1960</y><w>160</w><h>150</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>3834</x><y>1656</y><w>81</w><h>117</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>20;10;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>4257</x><y>1764</y><w>144</w><h>135</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _CommenttDto_
 --
 -commentID: UUID
@@ -182,18 +200,22 @@ _CommenttDto_
 -authorID: UUID
 -targetID: UUID
 -createdAt: DateTime
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>4740</x><y>1840</y><w>90</w><h>140</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;10;30;120</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1510</x><y>1800</y><w>300</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>4266</x><y>1656</y><w>81</w><h>126</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes><additional_attributes>10;10;30;120</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1359</x><y>1620</y><w>270</w><h>126</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _EventObserver_
 --
 
 --
-+notify(event: EventNotification): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1640</x><y>2000</y><w>300</w><h>80</h></coordinates><panel_attributes>_LoggingEventObserver_
++notify(event: EventNotification): void
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1476</x><y>1800</y><w>270</w><h>72</h></coordinates><panel_attributes>_LoggingEventObserver_
 --
 -logger: Logger
 --
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2480</x><y>1780</y><w>300</w><h>210</h></coordinates><panel_attributes>_Event_
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2232</x><y>1602</y><w>270</w><h>189</h></coordinates><panel_attributes>_Event_
 --
 -name: String
 -description: String
@@ -207,7 +229,9 @@ _EventObserver_
 +register(userID: UUID): void
 cancel(): void
 updateStatus(EventStatus): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2600</x><y>2110</y><w>220</w><h>140</h></coordinates><panel_attributes>_Participant_
+
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2340</x><y>1899</y><w>198</w><h>126</h></coordinates><panel_attributes>_Participant_
 --
 -participantID: UUID
 -userID: UUID 
@@ -216,25 +240,31 @@ updateStatus(EventStatus): void
 -status: ParticipationStatus
 --
 cancelParticipation(): void
-confirmParticipation(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2870</x><y>1830</y><w>300</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Enumerationen&gt;&gt;
+confirmParticipation(): void
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2583</x><y>1647</y><w>270</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Enumerationen&gt;&gt;
 EventStatus
 --
 PLANNED
 ACTIVE
 CANCELLED
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2930</x><y>2130</y><w>300</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Enumerationen&gt;&gt;
+--
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2637</x><y>1917</y><w>270</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Enumerationen&gt;&gt;
 ParticipationStatus
 --
 REGISTERED
 CANCELLED
 WAITING
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1800</x><y>1850</y><w>700</w><h>50</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;notify&gt;&gt;</panel_attributes><additional_attributes>10;20;680;30</additional_attributes></element><element><id>Relation</id><coordinates><x>1600</x><y>1930</y><w>160</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;140;70</additional_attributes></element><element><id>Relation</id><coordinates><x>2630</x><y>1980</y><w>90</w><h>150</h></coordinates><panel_attributes>lt=-
+--
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1620</x><y>1665</y><w>630</w><h>45</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;notify&gt;&gt;</panel_attributes><additional_attributes>10;20;680;30</additional_attributes></element><element><id>Relation</id><coordinates><x>1440</x><y>1737</y><w>144</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;140;70</additional_attributes></element><element><id>Relation</id><coordinates><x>2367</x><y>1782</y><w>81</w><h>135</h></coordinates><panel_attributes>lt=-
 m1=0..n
 m2=0..1
-besitzt &gt;</panel_attributes><additional_attributes>10;130;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2770</x><y>1860</y><w>120</w><h>40</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>100;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>2810</x><y>2160</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>120;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2290</x><y>2100</y><w>260</w><h>160</h></coordinates><panel_attributes>_Feedback_
+besitzt &gt;</panel_attributes><additional_attributes>10;130;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2493</x><y>1674</y><w>108</w><h>36</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>100;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>2529</x><y>1944</y><w>126</w><h>36</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>120;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2061</x><y>1890</y><w>234</w><h>144</h></coordinates><panel_attributes>_Feedback_
 --
 -feedbackID: UUID
 -userID: UUID
@@ -243,10 +273,12 @@ besitzt &gt;</panel_attributes><additional_attributes>10;130;30;10</additional_a
 -rating: Integer
 -createdAt: DateTime
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2450</x><y>1980</y><w>180</w><h>140</h></coordinates><panel_attributes>lt=-
+
+bg=green
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2205</x><y>1782</y><w>162</w><h>126</h></coordinates><panel_attributes>lt=-
 m1=0..n
 m2=0..1
-besitzt &gt;</panel_attributes><additional_attributes>10;120;160;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2000</x><y>1520</y><w>400</w><h>210</h></coordinates><panel_attributes>_EventService_
+besitzt &gt;</panel_attributes><additional_attributes>10;120;160;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1800</x><y>1368</y><w>360</w><h>189</h></coordinates><panel_attributes>_EventService_
 --
 -eventRepository: EventRepository
 -participantRepository: ParticipantRepository
@@ -260,37 +292,51 @@ besitzt &gt;</panel_attributes><additional_attributes>10;120;160;10</additional_
 +registerParticipant(eventId: UUID, userId: UUID): void
 +addFeedback(eventId: UUID, feedback: Feedback): Feedback
 +getFeedbacksByEventId(UUID eventId): List&lt;Feedback&gt;
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2010</x><y>1200</y><w>300</w><h>170</h></coordinates><panel_attributes>_EventController_
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1809</x><y>1080</y><w>270</w><h>153</h></coordinates><panel_attributes>_EventController_
 --
 
 --
 +createEvent(): void
 +manageParticipation(): void
-+eventDetails(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2520</x><y>1610</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
++eventDetails(): void
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2268</x><y>1449</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _EventRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2520</x><y>1440</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2268</x><y>1296</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _JpaRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2650</x><y>1540</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>2660</x><y>1710</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2280</x><y>2310</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2385</x><y>1386</y><w>27</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>2394</x><y>1539</y><w>27</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2052</x><y>2079</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _FeedbackRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2280</x><y>2490</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2052</x><y>2241</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _JpaRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2420</x><y>2250</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2400</x><y>2410</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2590</x><y>2310</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2178</x><y>2025</y><w>27</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2160</x><y>2169</y><w>27</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2331</x><y>2079</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _ParticipantRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2590</x><y>2490</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2331</x><y>2241</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _JpaRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2710</x><y>2410</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2710</x><y>2240</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1260</x><y>1990</y><w>300</w><h>130</h></coordinates><panel_attributes>_MqttEventObserver_
+--
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2439</x><y>2169</y><w>27</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2439</x><y>2016</y><w>27</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1134</x><y>1791</y><w>270</w><h>117</h></coordinates><panel_attributes>_MqttEventObserver_
 --
 -logger: Logger
 -mqttOutboundChannel: MessageChannel
@@ -299,26 +345,27 @@ _JpaRepository_
 +sendNotification(topic: String, notification: String): void
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1460</x><y>1570</y><w>300</w><h>160</h></coordinates><panel_attributes>_EventSubject_
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1314</x><y>1413</y><w>270</w><h>144</h></coordinates><panel_attributes>_EventSubject_
 
 --
 -observers: List&lt;EventObserver&gt;
 --
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1510</x><y>1930</y><w>60</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>40;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1620</x><y>1720</y><w>40</w><h>100</h></coordinates><panel_attributes>lt=&lt;-
-m1=*</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>1110</x><y>1480</y><w>850</w><h>800</h></coordinates><panel_attributes>Observer Mustern
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1359</x><y>1737</y><w>54</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>40;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1458</x><y>1548</y><w>36</w><h>90</h></coordinates><panel_attributes>lt=&lt;-
+m1=*</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>999</x><y>1332</y><w>765</w><h>720</h></coordinates><panel_attributes>Beobachter Mustern
 --
-bg=red
-fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2210</x><y>1360</y><w>30</w><h>180</h></coordinates><panel_attributes>lt=-
-</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>2390</x><y>1660</y><w>150</w><h>40</h></coordinates><panel_attributes>lt=-
-</panel_attributes><additional_attributes>130;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1750</x><y>1560</y><w>270</w><h>160</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;140;250;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>430</x><y>1810</y><w>250</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1989</x><y>1224</y><w>27</w><h>162</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>2151</x><y>1494</y><w>135</w><h>36</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>130;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1575</x><y>1404</y><w>243</w><h>144</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;140;250;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>387</x><y>1629</y><w>225</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _UserDtoCreator_
 --
 factory(user :User): UserDto 
 --
-group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>1910</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-
-group=group-0</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>1980</y><w>250</w><h>230</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+group=group-0
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>477</x><y>1719</y><w>27</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;-
+group=group-0</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>432</x><y>1782</y><w>225</w><h>207</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _UserDto_
 --
 -userID: UUID
@@ -332,14 +379,16 @@ _UserDto_
 -createdAt: Date
 -updatedAt: Date
 --
-group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>2010</y><w>160</w><h>40</h></coordinates><panel_attributes>lt=&lt;.
+group=group-0
+
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>306</x><y>1809</y><w>144</w><h>36</h></coordinates><panel_attributes>lt=&lt;.
 &lt;&lt;creates&gt;&gt;
-group=group-0</panel_attributes><additional_attributes>10;20;140;20</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>0</x><y>1780</y><w>840</w><h>460</h></coordinates><panel_attributes>Fabrikmethode1
+group=group-0</panel_attributes><additional_attributes>10;20;140;20</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>0</x><y>1593</y><w>756</w><h>423</h></coordinates><panel_attributes>Fabrikmethode1
 --
 
-bg=red
+
 fg=red
-group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>90</x><y>1950</y><w>260</w><h>230</h></coordinates><panel_attributes>_User_
+group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>81</x><y>1755</y><w>234</w><h>207</h></coordinates><panel_attributes>_User_
 --
 -userID: UUID
 -name: String
@@ -354,9 +403,11 @@ participation: List&lt;String&gt;
 +setParti(parti: String): void
 +getAllParti(): List&lt;String&gt;
 
+bg=blue
 
+group=group-0
 
-group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>430</x><y>1410</y><w>400</w><h>160</h></coordinates><panel_attributes>_UserController_
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>387</x><y>1269</y><w>360</w><h>144</h></coordinates><panel_attributes>_UserController_
 --
 -userService: UserService
 -authService: AuthService
@@ -365,32 +416,32 @@ group=group-0</panel_attributes><additional_attributes></additional_attributes><
  interessen: List&lt;String&gt;, email: String, passwort: String): boolean
 +loginUser(email: String, passwort: String): boolean
 +getUserProfile(userID: UUID): User
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>1650</y><w>400</w><h>90</h></coordinates><panel_attributes>_UserService_
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>441</x><y>1485</y><w>360</w><h>81</h></coordinates><panel_attributes>_UserService_
 --
 --
 +createUser(userData: Object): User
 +updateUser(userData: Object): boolean
 +getUser(): User
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>1560</y><w>70</w><h>110</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>1630</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>594</x><y>1404</y><w>63</w><h>99</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>72</x><y>1467</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _UserRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>1460</y><w>270</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+--
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>72</x><y>1314</y><w>243</w><h>99</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 _JpaRepository_
 --
 
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>1730</y><w>30</w><h>240</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;220</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>1560</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>1680</y><w>170</w><h>40</h></coordinates><panel_attributes>lt=-
-</panel_attributes><additional_attributes>10;20;150;20</additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>1730</y><w>70</w><h>100</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1330</x><y>1040</y><w>340</w><h>970</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;publish&gt;&gt;</panel_attributes><additional_attributes>320;10;20;110;10;950</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1600</x><y>880</y><w>300</w><h>170</h></coordinates><panel_attributes>_MQTT_
+--
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>198</x><y>1557</y><w>27</w><h>216</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;220</additional_attributes></element><element><id>Relation</id><coordinates><x>189</x><y>1404</y><w>27</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>306</x><y>1512</y><w>153</w><h>36</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;150;20</additional_attributes></element><element><id>Relation</id><coordinates><x>513</x><y>1557</y><w>63</w><h>90</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1197</x><y>936</y><w>306</w><h>873</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;publish&gt;&gt;</panel_attributes><additional_attributes>320;10;20;110;10;950</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1440</x><y>792</y><w>270</w><h>153</h></coordinates><panel_attributes>_MQTT_
 --
 
 --
-+createEvent(): void
-+manageParticipation(): void
-+eventDetails(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1890</x><y>410</y><w>750</w><h>600</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;subscripe&gt;&gt;</panel_attributes><additional_attributes>10;580;530;450;730;10</additional_attributes></element><element><id>Relation</id><coordinates><x>730</x><y>410</y><w>1330</w><h>1020</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;http&gt;&gt;</panel_attributes><additional_attributes>10;1000;1060;330;1310;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2290</x><y>360</y><w>2060</w><h>1040</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;http&gt;&gt;</panel_attributes><additional_attributes>10;10;2040;1020</additional_attributes></element><element><id>Relation</id><coordinates><x>2080</x><y>410</y><w>70</w><h>810</h></coordinates><panel_attributes>lt=&lt;.
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1701</x><y>369</y><w>675</w><h>540</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;subscripe&gt;&gt;</panel_attributes><additional_attributes>10;580;530;450;730;10</additional_attributes></element><element><id>Relation</id><coordinates><x>657</x><y>369</y><w>1197</w><h>918</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;http&gt;&gt;</panel_attributes><additional_attributes>10;1000;1060;330;1310;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2061</x><y>324</y><w>1854</w><h>936</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;http&gt;&gt;</panel_attributes><additional_attributes>10;10;2040;1020</additional_attributes></element><element><id>Relation</id><coordinates><x>1872</x><y>369</y><w>63</w><h>729</h></coordinates><panel_attributes>lt=&lt;.
 &lt;&lt;http&gt;&gt;</panel_attributes><additional_attributes>20;790;10;10</additional_attributes></element></diagram>
