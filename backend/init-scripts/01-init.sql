@@ -44,7 +44,8 @@ CREATE TABLE user_participation (
 -- Insert sample users
 INSERT INTO users (user_id, name, lastname, email, password_hashed, date_of_birth, address, created_at, updated_at) VALUES
 ('550e8400-e29b-41d4-a716-446655440000', 'John', 'Doe', 'john.doe@example.com', 'hashedpassword123', '1985-03-15', '123 Main St, City', NOW(), NOW()),
-('550e8400-e29b-41d4-a716-446655440001', 'Jane', 'Smith', 'jane.smith@example.com', 'hashedpassword456', '1990-07-22', '456 Oak Ave, Town', NOW(), NOW());
+('550e8400-e29b-41d4-a716-446655440001', 'Jane', 'Smith', 'jane.smith@example.com', 'hashedpassword456', '1990-07-22', '456 Oak Ave, Town', NOW(), NOW()),
+('550e8400-e29b-41d4-a716-446655440002', 'SWT', 'APP', 'swt.app@example.com', 'swtpassword123456', '1990-87-23', '456 Oak Ave, Town', NOW(), NOW());
 
 -- Insert sample interests
 INSERT INTO user_interests (user_id, interest) VALUES
