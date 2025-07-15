@@ -275,18 +275,7 @@ curl http://localhost:3000/actuator/prometheus
 - **Frontend-Entwickler**: [Name]
 - **DevOps-Engineer**: [Name]
 
-## 📄 Lizenz
 
-Dieses Projekt ist für Bildungszwecke an der [Universität/Hochschule] entwickelt.
-
-## 🆘 Support
-
-Bei Problemen oder Fragen:
-1. Überprüfen Sie die [Issues](link-to-issues)
-2. Konsultieren Sie die [Wiki](link-to-wiki)
-3. Kontaktieren Sie das Entwicklerteam
-
----
 
 **💡 Hinweis**: Stellen Sie sicher, dass alle Container ordnungsgemäß gestartet sind und die Health-Checks erfolgreich sind, bevor Sie die Anwendung verwenden.
 
