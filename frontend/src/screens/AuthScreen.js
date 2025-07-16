@@ -195,13 +195,6 @@ const AuthScreen = () => {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.button, styles.guestButton]}
-            onPress={handleGuestMode}
-            disabled={loading}
-          >
-            <Text style={styles.buttonText}>Continue as Guest</Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
