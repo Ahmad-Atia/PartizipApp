@@ -21,7 +21,7 @@ CREATE TABLE users (
     password_hashed VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     address VARCHAR(500),
-    date_of_birth DATE,
+    dateOfBirth DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -80,7 +80,7 @@ CREATE TABLE user_participation (
 -- );
 
 -- Insert sample users
-INSERT INTO users (user_id, name, lastname, avatar, password_hashed, email, address, date_of_birth, created_at, updated_at) VALUES
+INSERT INTO users (user_id, name, lastname, avatar, password_hashed, email, address, dateOfBirth, created_at, updated_at) VALUES
 ('550e8400-e29b-41d4-a716-446655440000', 'John', 'Doe', NULL, 'hashedpassword123', 'john.doe@example.com', '123 Main St, City', '1985-03-15', NOW(), NOW()),
 ('550e8400-e29b-41d4-a716-446655440001', 'Jane', 'Smith', NULL, 'hashedpassword456', 'jane.smith@example.com', '456 Oak Ave, Town', '1990-07-22', NOW(), NOW()),
 ('550e8400-e29b-41d4-a716-446655440002', 'SWT', 'APP', NULL, 'swtpassword123456', 'swt.app@example.com', '456 Oak Ave, Town', '1990-07-23', NOW(), NOW());
