@@ -52,7 +52,7 @@ const HomeTabHeader = ({ navigation }) => {
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.headerTitle}>PartiZip Kids</Text>
+      <Text style={styles.headerTitle}>PartiApp</Text>
       <TouchableOpacity 
         style={styles.headerNotificationButton}
         onPress={() => navigation.navigate('Notifications')}
@@ -134,10 +134,10 @@ const MainTabNavigator = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#007AFF',
+        tabBarActiveTintColor: '#26A9A2',
         tabBarInactiveTintColor: 'gray',
         headerStyle: {
-          backgroundColor: '#007AFF',
+          backgroundColor: '#26A9A2',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -152,7 +152,7 @@ const MainTabNavigator = () => {
           headerTitle: () => <HomeTabHeader navigation={navigation} />,
           headerTitleAlign: 'left',
           headerStyle: {
-            backgroundColor: '#007AFF',
+            backgroundColor: '#26A9A2',
           },
           headerTintColor: '#fff',
         })}
@@ -194,7 +194,7 @@ const AppNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#007AFF',
+          backgroundColor: '#26A9A2',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {

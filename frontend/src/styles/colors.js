@@ -1,8 +1,8 @@
 // Color constants based on the design system
 export const colors = {
   // Primary Colors
-  primary: '#2196F3',
-  primaryDark: '#1976D2',
+  primary: '#333',
+  primaryDark: '#333',
   
   // Secondary Colors
   secondary: '#A5D6A7',
@@ -33,7 +33,7 @@ export const colors = {
   
   // Specific Use Cases
   selectedOption: '#A5D6A7',
-  activeBorder: '#1976D2',
+  activeBorder: '#26A9A2',
   inactiveChip: 'rgba(255,255,255,0.8)',
   shadowColor: '#000000',
 };

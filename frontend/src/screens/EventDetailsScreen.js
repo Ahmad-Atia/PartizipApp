@@ -132,10 +132,10 @@ const EventDetailsScreen = ({ route, navigation }) => {
       <View style={styles.header}>
         <View style={styles.headerActions}>
           <TouchableOpacity style={styles.actionButton} onPress={handleShare}>
-            <Ionicons name="share-outline" size={24} color="#007AFF" />
+            <Ionicons name="share-outline" size={24} color="#26A9A2" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton} onPress={handleShowOnMap}>
-            <Ionicons name="location-outline" size={24} color="#007AFF" />
+            <Ionicons name="location-outline" size={24} color="#26A9A2" />
           </TouchableOpacity>
         </View>
         
@@ -243,7 +243,7 @@ const EventDetailsScreen = ({ route, navigation }) => {
           style={styles.feedbackButton}
           onPress={handleAddFeedback}
         >
-          <Ionicons name="chatbubble-outline" size={24} color="#007AFF" />
+          <Ionicons name="chatbubble-outline" size={24} color="#26A9A2" />
           <Text style={styles.feedbackButtonText}>Add Feedback</Text>
         </TouchableOpacity>
       </View>
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   backButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#26A9A2',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
@@ -391,7 +391,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   participateButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#26A9A2',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -435,10 +435,10 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 25,
     borderWidth: 1,
-    borderColor: '#007AFF',
+    borderColor: '#26A9A2',
   },
   feedbackButtonText: {
-    color: '#007AFF',
+    color: '#26A9A2',
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 8,

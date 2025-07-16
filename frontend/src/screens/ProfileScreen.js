@@ -100,7 +100,7 @@ const ProfileScreen = ({ navigation }) => {
   if (loading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#007AFF" />
+        <ActivityIndicator size="large" color="#333" />
       </View>
     );
   }
@@ -117,7 +117,7 @@ const ProfileScreen = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.avatarContainer}>
-          <Ionicons name="person-circle" size={80} color="#007AFF" />
+          <Ionicons name="person-circle" size={80} color="#333" />
         </View>
         <Text style={styles.name}>
           {profile.name && profile.lastname

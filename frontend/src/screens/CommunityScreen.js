@@ -396,7 +396,7 @@ const CommunityScreen = ({ navigation }) => {
           style={styles.headerCreateButton}
           onPress={() => setShowCreateModal(true)}
         >
-        <Ionicons name="add" size={24} color="#007AFF" />
+        <Ionicons name="add" size={24} color="#26A9A2" />
           <Text style={styles.headerCreateButtonText}>Create</Text>
         </TouchableOpacity>
       </View>
@@ -508,12 +508,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   headerCreateButtonText: {
-    color: '#007AFF',
+    color: '#26A9A2',
     marginLeft: 5,
     fontWeight: '500',
   },
   modalCreateButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#26A9A2',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
@@ -536,7 +536,7 @@ const styles = StyleSheet.create({
   },
   activeTab: {
     borderBottomWidth: 2,
-    borderBottomColor: '#007AFF',
+    borderBottomColor: '#26A9A2',
   },
   tabText: {
     fontSize: 16,
@@ -544,7 +544,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   activeTabText: {
-    color: '#007AFF',
+    color: '#26A9A2',
   },
   content: {
     flex: 1,
@@ -671,7 +671,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#26A9A2',
     opacity: 0.1,
   },
   pollTotal: {
@@ -739,11 +739,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   addOptionText: {
-    color: '#007AFF',
+    color: '#26A9A2',
     fontSize: 16,
   },
   createButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#26A9A2',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
@@ -766,7 +766,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   createFirstButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#26A9A2',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,

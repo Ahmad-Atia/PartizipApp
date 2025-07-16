@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Image } from 'react-native';
 import {
   View,
   Text,
@@ -108,7 +109,8 @@ const AuthScreen = () => {
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
-          <Text style={styles.title}>PartiZip Kids</Text>
+          <Image source={require('../../assets/logo.png')} style={{ width: 100, height: 100, marginBottom: 10, marginTop: 50 }} resizeMode="contain" />
+        
           <Text style={styles.subtitle}>
             {isLogin ? 'Welcome Back!' : 'Join the Community!'}
           </Text>

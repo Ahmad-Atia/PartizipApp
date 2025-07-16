@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "PartiZip Kids",
+    "name": "PartiApp",
     "slug": "partizip-kids",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,9 +9,9 @@
     "newArchEnabled": true,
     
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#007AFF"
+      "backgroundColor": "#26A9A2"
     },
     "assetBundlePatterns": [
       "**/*"
