@@ -197,7 +197,7 @@ const EventDetailsScreen = ({ route, navigation }) => {
             <Text style={styles.sectionTitle}>Feedback</Text>
             {event.feedbacks.slice(0, 3).map((feedback, index) => (
               <View key={index} style={styles.feedbackItem}>
-                <Text style={styles.feedbackText}>{feedback.comment}</Text>
+                <Text style={styles.feedbackText}>{feedback.content}</Text>
                 <Text style={styles.feedbackRating}>
                   {'★'.repeat(feedback.rating)}{'☆'.repeat(5 - feedback.rating)}
                 </Text>
