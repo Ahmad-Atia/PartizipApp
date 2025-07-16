@@ -32,8 +32,8 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "API_BASE_URL": "http://192.168.0.101:3000/api",
-      "WEBSOCKET_URL": "ws://192.168.0.101:3000/ws/events",
+      "API_BASE_URL": "http://192.168.0.102:3000/api",
+      "WEBSOCKET_URL": "ws://192.168.0.102:3000/ws/events",
       "BROKER_URL": "ws://192.168.178.38:9001"
     }
   }
