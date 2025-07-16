@@ -138,14 +138,6 @@ const HomeScreen = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.actionButton}
-          onPress={() => navigation.navigate('Calendar')}
-        >
-          <Ionicons name="calendar" size={24} color={colors.primary} />
-          <Text style={styles.actionText}>Calendar View</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.actionButton}
           onPress={() => navigation.navigate('Community')}
         >
           <Ionicons name="people" size={24} color={colors.primary} />

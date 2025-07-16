@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Alert
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useApp } from '../context/AppContext';
 import { styles } from '../styles/ProfileScreen.style';
+import UserService from '../services/UserService';
 
 const ProfileScreen = ({ navigation }) => {
   const { user, logout } = useApp();
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (user?.id) {
+        const result = await UserService.getUserProfile(user.id);
+        if (result.success) {
+          setProfile(result.user);
+        }
+      }
+      setLoading(false);
+    };
+    fetchProfile();
+  }, [user]);
 
   const handleLogout = async () => {
     Alert.alert(
@@ -44,18 +61,8 @@ const ProfileScreen = ({ navigation }) => {
     },
     {
       icon: 'calendar-outline',
-      title: 'My Events',
+      title: 'Events',
       onPress: () => navigation.navigate('Events')
-    },
-    {
-      icon: 'people-outline',
-      title: 'My Communities',
-      onPress: () => navigation.navigate('Community')
-    },
-    {
-      icon: 'settings-outline',
-      title: 'Settings',
-      onPress: () => Alert.alert('Coming Soon', 'Settings will be available soon!')
     },
     {
       icon: 'help-circle-outline',
@@ -90,6 +97,22 @@ const ProfileScreen = ({ navigation }) => {
     );
   }
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#007AFF" />
+      </View>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.guestTitle}>No profile data found.</Text>
+      </View>
+    );
+  }
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -97,28 +120,14 @@ const ProfileScreen = ({ navigation }) => {
           <Ionicons name="person-circle" size={80} color="#007AFF" />
         </View>
         <Text style={styles.name}>
-          {user?.name && user?.lastname 
-            ? `${user.name} ${user.lastname}` 
+          {profile.name && profile.lastname
+            ? `${profile.name} ${profile.lastname}`
             : 'User'
           }
         </Text>
-        <Text style={styles.email}>{user?.email || 'No email'}</Text>
+        <Text style={styles.email}>{profile.email || 'No email'}</Text>
       </View>
 
-      <View style={styles.stats}>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>0</Text>
-          <Text style={styles.statLabel}>Events Joined</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>0</Text>
-          <Text style={styles.statLabel}>Communities</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>0</Text>
-          <Text style={styles.statLabel}>Events Created</Text>
-        </View>
-      </View>
 
       <View style={styles.menu}>
         {menuItems.map((item, index) => (

@@ -112,7 +112,7 @@ const EventsScreen = ({ navigation }) => {
         <View style={styles.eventHeader}>
           <Text style={styles.eventTitle}>{event.name || event.title || 'Untitled Event'}</Text>
           <View style={styles.eventStatus}>
-            <Text style={[styles.statusText, { color: event.status === 'PLANNED' ? '#007AFF' : '#28a745' }]}>
+            <Text style={[styles.statusText, { color: event.status === 'PLANNED' ? '#3f3f3f' : '#28a745' }]}>
               {event.status || 'Unknown'}
             </Text>
           </View>

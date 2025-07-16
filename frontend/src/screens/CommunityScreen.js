@@ -21,7 +21,7 @@ const CommunityScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState('posts'); // 'posts' or 'polls'
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [createType, setCreateType] = useState('post'); // 'post' or 'poll'
+  const [showCreateDropdown, setShowCreateDropdown] = useState(false);
   const [postContent, setPostContent] = useState('');
   const [pollQuestion, setPollQuestion] = useState('');
   const [pollOptions, setPollOptions] = useState(['', '']);
@@ -34,14 +34,14 @@ const CommunityScreen = ({ navigation }) => {
   const loadContent = async () => {
     try {
       if (activeTab === 'posts') {
-        const result = await CommunityService.getAllPosts();
+        const result = await CommunityService.getAllPostsWithAuthors();
         if (result.success) {
           setPosts(result.posts);
         } else {
           Alert.alert('Error', result.error || 'Failed to load posts');
         }
       } else {
-        const result = await CommunityService.getAllPolls();
+        const result = await CommunityService.getAllPollsWithAuthors();
         if (result.success) {
           setPolls(result.polls);
         } else {
@@ -200,7 +200,7 @@ const CommunityScreen = ({ navigation }) => {
     return (
       <View key={post.postID} style={styles.postCard}>
         <View style={styles.postHeader}>
-          <Text style={styles.postAuthor}>User {post.authorID}</Text>
+          <Text style={styles.postAuthor}>User {post.authorName}</Text>
           <Text style={styles.postTime}>{formattedPost.timeAgo}</Text>
         </View>
         
@@ -244,7 +244,7 @@ const CommunityScreen = ({ navigation }) => {
     return (
       <View key={poll.pollID} style={styles.pollCard}>
         <View style={styles.pollHeader}>
-          <Text style={styles.pollAuthor}>User {poll.authorID}</Text>
+          <Text style={styles.pollAuthor}>User {poll.authorName}</Text>
           <Text style={styles.pollTime}>{formattedPoll.timeAgo}</Text>
         </View>
         
@@ -284,16 +284,16 @@ const CommunityScreen = ({ navigation }) => {
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>
-              Create {createType === 'post' ? 'Post' : 'Poll'}
-            </Text>
+            <Text style={styles.modalTitle}>Create Post or Poll</Text>
             <TouchableOpacity onPress={() => setShowCreateModal(false)}>
               <Ionicons name="close" size={24} color="#666" />
             </TouchableOpacity>
           </View>
-          
-          {createType === 'post' ? (
+          {/* Beide Formulare werden angezeigt */}
+          <ScrollView>
+            {/* Post-Formular */}
             <View style={styles.createForm}>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>Create Post</Text>
               <TextInput
                 style={styles.textInput}
                 placeholder="What's on your mind?"
@@ -306,8 +306,9 @@ const CommunityScreen = ({ navigation }) => {
                 <Text style={styles.modalCreateButtonText}>Create Post</Text>
               </TouchableOpacity>
             </View>
-          ) : (
+            {/* Poll-Formular */}
             <View style={styles.createForm}>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>Create Poll</Text>
               <TextInput
                 style={styles.textInput}
                 placeholder="Ask a question..."
@@ -339,9 +340,43 @@ const CommunityScreen = ({ navigation }) => {
                 <Text style={styles.modalCreateButtonText}>Create Poll</Text>
               </TouchableOpacity>
             </View>
-          )}
+          </ScrollView>
         </View>
       </View>
+    </Modal>
+  );
+
+  const renderCreateDropdown = () => (
+    <Modal
+      visible={showCreateDropdown}
+      transparent={true}
+      animationType="fade"
+      onRequestClose={() => setShowCreateDropdown(false)}
+    >
+      <TouchableOpacity
+        style={styles.dropdownOverlay}
+        activeOpacity={1}
+        onPressOut={() => setShowCreateDropdown(false)}
+      >
+        <View style={styles.dropdownMenu}>
+          <TouchableOpacity
+            style={styles.dropdownItem}
+            onPress={() => {
+              setShowCreateModal(true);
+            }}
+          >
+            <Text style={styles.dropdownText}>Create Post</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.dropdownItem}
+            onPress={() => {
+              setShowCreateModal(true);
+            }}
+          >
+            <Text style={styles.dropdownText}>Create Poll</Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
     </Modal>
   );
 
@@ -356,16 +391,14 @@ const CommunityScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Community</Text>      <TouchableOpacity
-        style={styles.headerCreateButton}
-        onPress={() => {
-          setCreateType(activeTab); // Set to current tab (posts/polls)
-          setShowCreateModal(true);
-        }}
-      >
+        <Text style={styles.headerTitle}>Community</Text>
+        <TouchableOpacity
+          style={styles.headerCreateButton}
+          onPress={() => setShowCreateModal(true)}
+        >
         <Ionicons name="add" size={24} color="#007AFF" />
-        <Text style={styles.headerCreateButtonText}>Create</Text>
-      </TouchableOpacity>
+          <Text style={styles.headerCreateButtonText}>Create</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.tabContainer}>
@@ -374,8 +407,9 @@ const CommunityScreen = ({ navigation }) => {
           onPress={() => setActiveTab('posts')}
         >
           <Text style={[styles.tabText, activeTab === 'posts' && styles.activeTabText]}>
-            Posts
+            Posts 
           </Text>
+           
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.tab, activeTab === 'polls' && styles.activeTab]}
@@ -384,6 +418,7 @@ const CommunityScreen = ({ navigation }) => {
           <Text style={[styles.tabText, activeTab === 'polls' && styles.activeTabText]}>
             Polls
           </Text>
+           
         </TouchableOpacity>
       </View>
 
@@ -400,10 +435,7 @@ const CommunityScreen = ({ navigation }) => {
               <Text style={styles.emptyText}>No posts yet</Text>
               <TouchableOpacity
                 style={styles.createFirstButton}
-                onPress={() => {
-                  setCreateType('post');
-                  setShowCreateModal(true);
-                }}
+                onPress={() => setShowCreateModal(true)}
               >
                 <Text style={styles.createFirstButtonText}>Create First Post</Text>
               </TouchableOpacity>
@@ -418,10 +450,7 @@ const CommunityScreen = ({ navigation }) => {
               <Text style={styles.emptyText}>No polls yet</Text>
               <TouchableOpacity
                 style={styles.createFirstButton}
-                onPress={() => {
-                  setCreateType('poll');
-                  setShowCreateModal(true);
-                }}
+                onPress={() => setShowCreateModal(true)}
               >
                 <Text style={styles.createFirstButtonText}>Create First Poll</Text>
               </TouchableOpacity>
@@ -433,6 +462,7 @@ const CommunityScreen = ({ navigation }) => {
       </ScrollView>
 
       {renderCreateModal()}
+      {renderCreateDropdown()}
     </View>
   );
 };
@@ -744,6 +774,27 @@ const styles = StyleSheet.create({
   createFirstButtonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  dropdownOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dropdownMenu: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    minWidth: 180,
+    elevation: 5,
+  },
+  dropdownItem: {
+    paddingVertical: 12,
+  },
+  dropdownText: {
+    fontSize: 16,
+    color: '#26A9A2',
+    textAlign: 'center',
   },
 });
 

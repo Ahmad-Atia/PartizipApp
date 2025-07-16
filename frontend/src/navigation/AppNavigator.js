@@ -8,7 +8,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AuthScreen from '../screens/AuthScreen';
 import HomeScreen from '../screens/HomeScreen';
 import EventsScreen from '../screens/EventsScreen';
-import CalendarScreen from '../screens/CalendarScreen';
 import EventDetailsScreen from '../screens/EventDetailsScreen';
 import CommunityScreen from '../screens/CommunityScreen';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -163,11 +162,7 @@ const MainTabNavigator = () => {
         component={EventsScreen} 
         options={{ title: 'Events' }}
       />
-      <Tab.Screen 
-        name="Calendar" 
-        component={CalendarScreen} 
-        options={{ title: 'Calendar' }}
-      />
+    
       <Tab.Screen 
         name="Community" 
         component={CommunityScreen} 

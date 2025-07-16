@@ -1,4 +1,5 @@
 import ApiService from './ApiService';
+import UserService from './UserService';
 
 class CommunityService {
   constructor() {
@@ -53,6 +54,88 @@ class CommunityService {
     } catch (error) {
       console.error(`Failed to share post ${postId}:`, error);
       return { success: false, error: error.message };
+    }
+  }
+// ...existing code...
+
+  async getAllPollsWithAuthors() {
+    try {
+      // Fetch all polls
+      const pollsResult = await this.getAllPolls();
+      if (!pollsResult.success) {
+        return { success: false, error: pollsResult.error || 'Failed to fetch polls' };
+      }
+      const polls = pollsResult.polls;
+
+      // Get unique author IDs
+      const authorIDs = [...new Set(polls.map(poll => poll.authorID))];
+
+      // Fetch author profiles in parallel
+      const authorPromises = authorIDs.map(id => UserService.getUserProfile(id));
+      const authorResults = await Promise.all(authorPromises);
+
+      // Build a map of authorID to author name
+      const authorMap = {};
+      authorResults.forEach((result, idx) => {
+        const id = authorIDs[idx];
+        if (result.success && result.user && result.user.name) {
+          authorMap[id] = result.user.name;
+        } else {
+          authorMap[id] = `User ${id}`;
+        }
+      });
+
+      // Attach authorName to each poll
+      const pollsWithAuthors = polls.map(poll => ({
+        ...poll,
+        authorName: authorMap[poll.authorID] || `User ${poll.authorID}`
+      }));
+
+      return { success: true, polls: pollsWithAuthors };
+    } catch (error) {
+      return { success: false, error: error.message || 'Unknown error' };
+    }
+  }
+  /**
+   * Fetch all posts and attach author name to each post.
+   * Returns: { success: true, posts: [{...post, authorName}], ... }
+   */
+  async getAllPostsWithAuthors() {
+    try {
+      // Fetch all posts
+      const postsResult = await this.getAllPosts();
+      if (!postsResult.success) {
+        return { success: false, error: postsResult.error || 'Failed to fetch posts' };
+      }
+      const posts = postsResult.posts;
+
+      // Get unique author IDs
+      const authorIDs = [...new Set(posts.map(post => post.authorID))];
+
+      // Fetch author profiles in parallel
+      const authorPromises = authorIDs.map(id => UserService.getUserProfile(id));
+      const authorResults = await Promise.all(authorPromises);
+
+      // Build a map of authorID to author name
+      const authorMap = {};
+      authorResults.forEach((result, idx) => {
+        const id = authorIDs[idx];
+        if (result.success && result.user && result.user.name) {
+          authorMap[id] = result.user.name;
+        } else {
+          authorMap[id] = `User ${id}`;
+        }
+      });
+
+      // Attach authorName to each post
+      const postsWithAuthors = posts.map(post => ({
+        ...post,
+        authorName: authorMap[post.authorID] || `User ${post.authorID}`
+      }));
+
+      return { success: true, posts: postsWithAuthors };
+    } catch (error) {
+      return { success: false, error: error.message || 'Unknown error' };
     }
   }
 
